@@ -1,0 +1,27 @@
+diff -Naurw stb-orig/stb_image_resize2.h stb-patched/stb_image_resize2.h
+--- stb-orig/stb_image_resize2.h	2024-07-29 00:39:05.000000000 -0400
++++ stb-patched/stb_image_resize2.h	2025-05-19 08:45:50.206182397 -0400
+@@ -6526,21 +6526,12 @@
+   //   overhang, and once for the right side). We only do this for edge mode, since the other 
+   //   modes can just re-edge clamp back in again.
+   if ( edge == STBIR_EDGE_WRAP )
+-    if ( samp->filter_pixel_width > ( scale_info->input_full_size * 3 ) )
+-      samp->filter_pixel_width = scale_info->input_full_size * 3;
++    if ( samp->filter_pixel_width > ( scale_info->input_full_size * 2 ) )
++      samp->filter_pixel_width = scale_info->input_full_size * 2;
+ 
+   // This is how much to expand buffers to account for filters seeking outside
+   // the image boundaries.
+   samp->filter_pixel_margin = samp->filter_pixel_width / 2;
+-  
+-  // filter_pixel_margin is the amount that this filter can overhang on just one side of either 
+-  //   end of the scanline (left or the right). Since we only allow you to overhang 1 scanline's 
+-  //   worth of pixels, we clamp this one side of overhang to the input scanline size. Again, 
+-  //   this clamping only happens in rare cases with the default filters (2 pix to 1 pix). 
+-  if ( edge == STBIR_EDGE_WRAP )
+-    if ( samp->filter_pixel_margin > scale_info->input_full_size )
+-      samp->filter_pixel_margin = scale_info->input_full_size;
+-
+   samp->num_contributors = stbir__get_contributors(samp, samp->is_gather);
+ 
+   samp->contributors_size = samp->num_contributors * sizeof(stbir__contributors);

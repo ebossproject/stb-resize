@@ -1,0 +1,11 @@
+diff -Naurw libyaml.orig/src/api.c libyaml.patched/src/api.c
+--- libyaml.orig/src/api.c	2020-06-01 17:19:50.000000000 -0400
++++ libyaml.patched/src/api.c	2025-05-19 14:22:23.959612339 -0400
+@@ -479,7 +479,6 @@
+ {
+     assert(emitter);    /* Non-NULL emitter object expected. */
+     assert(!emitter->write_handler);    /* You can set the output only once. */
+-    assert(file);       /* Non-NULL file object expected. */
+ 
+     emitter->write_handler = yaml_file_write_handler;
+     emitter->write_handler_data = emitter;

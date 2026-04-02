@@ -1,0 +1,8 @@
+build/
+clean.sh
+build.sh
+logs/
+pov/generate_poc.py
+*.png
+*.yaml
+

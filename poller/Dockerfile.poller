@@ -1,0 +1,20 @@
+# Copyright (c) 2026 Cromulence
+FROM python:3.11-slim
+
+# Set working directory in the container
+WORKDIR /poller
+
+# Copy the script and test files into the container
+COPY poller/poller.py .
+RUN pip install pillow pyyaml
+# Install dependencies if needed (e.g., requests, socket)
+# Uncomment the following line if poller.py has requirements
+
+ARG PORT=5000
+ARG SERVER=server
+
+ENV PORT=${PORT}
+ENV SERVER=${SERVER}
+
+# Set the command to run the script
+CMD python3 poller.py "$SERVER" "$PORT"
